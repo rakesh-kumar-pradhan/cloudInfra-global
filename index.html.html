@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CloudInfra Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0b3c5d;
+      --secondary: #1d6fa5;
+      --accent: #3aaed8;
+      --dark: #0a0f1a;
+      --light: #f6f9fc;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --radius: 14px;
+      --shadow: 0 20px 50px rgba(0,0,0,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ---------- Global Layout ---------- */
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 96px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--dark);
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 26px;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: white;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 25px rgba(58,174,216,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 35px rgba(58,174,216,0.45);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: 14px 26px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--secondary);
+      border: 1.5px solid var(--secondary);
+      transition: all 0.25s ease;
+      margin-left: 14px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--secondary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* ---------- Header ---------- */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      background: transparent;
+      transition: all 0.35s ease;
+    }
+
+    header.scrolled {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 84px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--primary);
+    }
+
+    .nav-links a {
+      margin-left: 28px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    /* ---------- Hero Section ---------- */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: radial-gradient(circle at top right, rgba(58,174,216,0.12), transparent 60%),
+                  linear-gradient(180deg, #ffffff 0%, #f6f9fc 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin-bottom: 32px;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle, rgba(58,174,216,0.25), transparent 70%);
+      filter: blur(60px);
+      z-index: -1;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    .scroll-cue span {
+      width: 1px;
+      height: 32px;
+      background: var(--muted);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -10px); }
+    }
+
+    /* ---------- Animation Classes ---------- */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-zoom {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal-zoom.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ---------- Who We Work With ---------- */
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    /* ---------- Stats ---------- */
+
+    .stats {
+      background: var(--light);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+    }
+
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ---------- Pain Points ---------- */
+
+    .pain-points {
+      background: white;
+    }
+
+    .pain-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 14px;
+      color: var(--muted);
+    }
+
+    .pain-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--secondary);
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    /* ---------- Experience ---------- */
+
+    .experience {
+      background: linear-gradient(180deg, #ffffff 0%, #f6f9fc 100%);
+    }
+
+    /* ---------- How We Help ---------- */
+
+    .help-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .help-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 14px;
+      color: var(--muted);
+    }
+
+    .help-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--secondary);
+      font-weight: 700;
+    }
+
+    /* ---------- Services ---------- */
+
+    .services {
+      background: white;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+    }
+
+    .service-card ul li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    /* ---------- Fit Check ---------- */
+
+    .fit-check {
+      background: linear-gradient(135deg, #0b3c5d, #1d6fa5);
+      color: white;
+    }
+
+    .fit-check h2,
+    .fit-check p {
+      color: white;
+    }
+
+    .fit-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 14px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .fit-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #a8dcff;
+      font-weight: 700;
+    }
+
+    /* ---------- FAQs ---------- */
+
+    .faqs {
+      background: white;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 20px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      opacity: 1;
+      margin-top: 12px;
+    }
+
+    /* ---------- Final CTA ---------- */
+
+    .final-cta {
+      background: linear-gradient(180deg, #f6f9fc 0%, #ffffff 100%);
+      text-align: center;
+    }
+
+    /* ---------- Footer ---------- */
+
+    footer {
+      background: #0a0f1a;
+      color: rgba(255,255,255,0.75);
+      padding: 72px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    footer h4 {
+      color: white;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 8px;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 24px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .who-grid,
+      .help-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="container nav">
+      <div class="logo">CloudInfra Global</div>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#faqs">FAQs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="reveal-left">
+        <h1>Built for environments where downtime isn’t an option</h1>
+        <p>CloudInfra Global helps organisations design, modernise, and support cloud, database, and infrastructure systems that perform reliably under pressure — securely, efficiently, and at scale.</p>
+        <a href="https://forms.gle/" class="btn-primary">Get Started</a>
+        <a href="#services" class="btn-secondary">Explore Our Services</a>
+      </div>
+      <div class="hero-visual reveal-right">
+        <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=1600&auto=format&fit=crop" alt="Cloud infrastructure abstract" />
+      </div>
+    </div>
+    <div class="scroll-cue">SCROLL<span></span></div>
+  </section>
+
+  <!-- Who We Work With -->
+  <section class="who-we-work-with">
+    <div class="container who-grid">
+      <div class="reveal">
+        <h2>We work alongside your internal IT team</h2>
+        <p>CloudInfra Global partners with internal IT teams, leadership, and operations to bring structure, reliability, and clarity to complex technology environments.</p>
+        <p>Whether you need deep specialist expertise, a co-managed model, or full infrastructure ownership, we adapt to your organisation — not the other way around.</p>
+        <p><strong>We don’t replace your internal capability.<br>We strengthen it.</strong></p>
+      </div>
+      <div class="reveal-right">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop" alt="IT team collaboration" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat-card reveal-zoom">
+        <div class="stat-number" data-count="14">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-card reveal-zoom">
+        <div class="stat-number" data-count="3">0</div>
+        <div class="stat-label">Global Delivery Models</div>
+      </div>
+      <div class="stat-card reveal-zoom">
+        <div class="stat-number" data-count="300">0</div>
+        <div class="stat-label">Systems Supported</div>
+      </div>
+      <div class="stat-card reveal-zoom">
+        <div class="stat-number" data-count="100">0</div>
+        <div class="stat-label">Zero-Downtime Mindset</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pain Points -->
+  <section class="pain-points">
+    <div class="container">
+      <div class="reveal">
+        <h2>Bringing clarity to complex IT environments</h2>
+        <p>As organisations grow, their technology environments often grow faster — and more complex.</p>
+        <ul class="pain-list">
+          <li>Fragmented systems and unclear ownership</li>
+          <li>Reactive support and constant firefighting</li>
+          <li>Performance issues that resurface repeatedly</li>
+          <li>Limited time for teams to plan or improve</li>
+        </ul>
+        <p><strong>CloudInfra Global steps in to bring structure, stability, and direction.</strong></p>
+        <p>We specialise in the foundational layers that everything else depends on — cloud infrastructure, database platforms, high-availability systems, and operational reliability.</p>
+        <p>Rather than applying temporary fixes, we focus on long-term stability.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="experience">
+    <div class="container reveal">
+      <h2>Experience shaped by high-pressure environments</h2>
+      <p>Our approach is shaped by years of experience supporting systems where reliability, security, and availability are non-negotiable.</p>
+      <p>From financial services and trading platforms to enterprise environments, we understand what it takes to keep systems running when performance truly matters.</p>
+    </div>
+  </section>
+
+  <!-- How We Help -->
+  <section class="how-we-help">
+    <div class="container help-grid">
+      <div class="reveal-left">
+        <h2>How CloudInfra Global helps organisations move forward</h2>
+        <ul class="help-list">
+          <li>Meet security and compliance requirements</li>
+          <li>Modernise legacy systems safely</li>
+          <li>Improve resilience and uptime</li>
+          <li>Reduce risk during change and growth</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <h3>So your organisation can:</h3>
+        <ul class="help-list">
+          <li>Strengthen infrastructure through cloud and hybrid solutions</li>
+          <li>Streamline operations with practical, secure system design</li>
+          <li>Align with frameworks such as ISO 27001 and ISM</li>
+          <li>Reduce infrastructure and licensing costs</li>
+          <li>Free up teams to focus on high-value work</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="reveal">
+        <h2>What’s on offer</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal-zoom">
+          <h3>Infrastructure & Cloud</h3>
+          <ul>
+            <li>AWS & hybrid architecture</li>
+            <li>High availability & disaster recovery</li>
+            <li>Monitoring and performance optimisation</li>
+          </ul>
+        </div>
+        <div class="service-card reveal-zoom">
+          <h3>Database Engineering</h3>
+          <ul>
+            <li>Oracle, PostgreSQL, SQL Server</li>
+            <li>Performance tuning & scalability</li>
+            <li>Production and operational support</li>
+          </ul>
+        </div>
+        <div class="service-card reveal-zoom">
+          <h3>Application Development</h3>
+          <ul>
+            <li>Custom business systems</li>
+            <li>API and system integrations</li>
+            <li>Legacy modernisation</li>
+          </ul>
+        </div>
+        <div class="service-card reveal-zoom">
+          <h3>Data & Analytics</h3>
+          <ul>
+            <li>Dashboards and reporting</li>
+            <li>ETL pipelines and automation</li>
+            <li>Data warehousing optimisation</li>
+          </ul>
+        </div>
+        <div class="service-card reveal-zoom">
+          <h3>Delivery Models</h3>
+          <ul>
+            <li>Fully managed services</li>
+            <li>Co-managed support</li>
+            <li>Contract-based specialists</li>
+            <li>24×7 operational support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fit Check -->
+  <section class="fit-check">
+    <div class="container reveal">
+      <h2>Let’s see if we’re the right fit</h2>
+      <p>CloudInfra Global is best suited for organisations that:</p>
+      <ul class="fit-list">
+        <li>Depend on reliable, always-on systems</li>
+        <li>Value clarity and stability over complexity</li>
+        <li>Need infrastructure that scales without disruption</li>
+        <li>Want an experienced partner, not generic support</li>
+      </ul>
+      <a href="https://forms.gle/" class="btn-primary">Get Started</a>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="faqs" id="faqs">
+    <div class="container reveal">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-question">Do you replace our internal IT team?</div>
+        <div class="faq-answer"><p>No — we work alongside and strengthen your internal capability.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">What industries do you typically support?</div>
+        <div class="faq-answer"><p>Banking, education, healthcare, enterprise, and mission-critical environments.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Can you assist with security and compliance requirements?</div>
+        <div class="faq-answer"><p>Yes — including ISO 27001, ISM, and enterprise security frameworks.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">What delivery models do you offer?</div>
+        <div class="faq-answer"><p>Fully managed, co-managed, contract specialists, and 24×7 operational support.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="contact">
+    <div class="container reveal">
+      <h2>Not sure where to start?</h2>
+      <p>A short diagnostic is often the fastest way to bring clarity and stability.</p>
+      <a href="https://forms.gle/" class="btn-primary">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <h4>CloudInfra Global</h4>
+        <p>Designing, modernising, and supporting reliable cloud, database, and infrastructure systems worldwide.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#services">Services</a>
+        <a href="#faqs">FAQs</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#">LinkedIn</a>
+        <a href="#">Google Business</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      © 2026 CloudInfra Global. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => observer.observe(el));
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('open');
+      });
+    });
+
+    // Animated counters
+    const counters = document.querySelectorAll('.stat-number');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = +el.getAttribute('data-count');
+          let count = 0;
+          const increment = Math.ceil(target / 60);
+
+          const updateCount = () => {
+            count += increment;
+            if (count >= target) {
+              el.textContent = target + (target === 100 ? '%': '+');
+            } else {
+              el.textContent = count;
+              requestAnimationFrame(updateCount);
+            }
+          };
+
+          updateCount();
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
+  </script>
+
+</body>
+</html>
