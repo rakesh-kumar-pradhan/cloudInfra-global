@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+/* ./css/tailwind.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    /*CloudInfra dark green */
+    --color-primary: #0B5D3B;
+    --color-primary-50: #E9F5EF;
+    --color-primary-100: #CFEBDD;
+    --color-primary-200: #A7D8BF;
+    --color-primary-300: #7FC5A1;
+    --color-primary-400: #56B283;
+    --color-primary-500: #2F8F5B;
+    --color-primary-600: #24734A;
+    --color-primary-700: #0B5D3B;
+    --color-primary-800: #094A2F;
+    --color-primary-900: #063321;
+
+    /* Secondary Colors - Supporting Technical Depth */
+    --color-secondary: #2F8F5B;
+    --color-secondary-50: #ECF8F1;
+    --color-secondary-100: #D3EFDF;
+    --color-secondary-200: #AEE0C5;
+    --color-secondary-300: #88D0AA;
+    --color-secondary-400: #63C190;
+    --color-secondary-500: #3FB276;
+    --color-secondary-600: #2F8F5B;
+    --color-secondary-700: #257047;
+    --color-secondary-800: #1B5234;
+    --color-secondary-900: #123726;
+
+    /* Accent Colors - Strategic Focus Moments */
+    --color-accent: #7BCB8B;
+    --color-accent-50: #F2FBF5;
+    --color-accent-100: #DEF4E4;
+    --color-accent-200: #BFE9CA;
+    --color-accent-300: #A0DDB0;
+    --color-accent-400: #7BCB8B;
+    --color-accent-500: #5BBE72;
+    --color-accent-600: #3FA35A;
+    --color-accent-700: #2E7F45;
+    --color-accent-800: #1F5C32;
+    --color-accent-900: #143E22;
+
+    /* Background Colors */
+    --color-background: #F9FCFA;
+    --color-surface: #EFF7F2;
+    /* Text Colors */
+    --color-text-primary: #10261C;
+    --color-text-secondary: #4A6B5A;
+
+    /* Status Colors */
+    --color-success: #2F8F5B;
+    --color-success-50: #f0fdf4;
+    --color-success-100: #dcfce7;
+    --color-success-200: #bbf7d0;
+    --color-success-300: #86efac;
+    --color-success-400: #4ade80;
+    --color-success-500: #22c55e;
+    --color-success-600: #38a169; /* success green */
+    --color-success-700: #15803d;
+    --color-success-800: #166534;
+    --color-success-900: #14532d;
+
+    --color-warning: #d69e2e; /* yellow-600 */
+    --color-warning-50: #fefce8;
+    --color-warning-100: #fef9c3;
+    --color-warning-200: #fef08a;
+    --color-warning-300: #fde047;
+    --color-warning-400: #facc15;
+    --color-warning-500: #eab308;
+    --color-warning-600: #d69e2e; /* warning yellow */
+    --color-warning-700: #a16207;
+    --color-warning-800: #854d0e;
+    --color-warning-900: #713f12;
+
+    --color-error: #e53e3e; /* red-600 */
+    --color-error-50: #fef2f2;
+    --color-error-100: #fee2e2;
+    --color-error-200: #fecaca;
+    --color-error-300: #fca5a5;
+    --color-error-400: #f87171;
+    --color-error-500: #ef4444;
+    --color-error-600: #e53e3e; /* error red */
+    --color-error-700: #b91c1c;
+    --color-error-800: #991b1b;
+    --color-error-900: #7f1d1d;
+
+    /* Shadow Definitions */
+    --shadow-subtle: 0 1px 3px rgba(11, 93, 59, 0.08);
+    --shadow-elevated: 0 6px 18px rgba(11, 93, 59, 0.15);
+    --shadow-card: 0 3px 10px rgba(11, 93, 59, 0.10);
+    --shadow-hover: 0 8px 22px rgba(11, 93, 59, 0.18);
+
+    /* Animation Timing */
+    --transition-base: 300ms ease-out;
+    --transition-stagger: 100ms;
+  }
+
+  body {
+    @apply font-body text-text-primary bg-background antialiased;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-headline font-semibold;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold leading-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-4xl font-semibold leading-snug;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl lg:text-3xl font-semibold leading-snug;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl lg:text-2xl font-semibold leading-normal;
+  }
+
+  h6 {
+    @apply text-base md:text-lg lg:text-xl font-semibold leading-normal;
+  }
+
+  p {
+    @apply text-base leading-relaxed;
+  }
+
+  code,
+  pre {
+    @apply font-mono text-sm;
+  }
+}
+
+@layer components {
+
+  /* Card Components */
+  .card {
+    @apply bg-white rounded-lg;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow var(--transition-base);
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  .card-elevated {
+    @apply bg-white rounded-lg;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Button Components */
+  .btn {
+    @apply font-cta font-semibold px-6 py-3 rounded-md transition-all duration-300 ease-out;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-800;
+    @apply focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary-800;
+    @apply focus:ring-secondary-500;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-white hover:bg-accent-700;
+    @apply focus:ring-accent-500;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white;
+    @apply focus:ring-primary-500;
+  }
+
+  /* Form Components */
+  .form-input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-md;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent;
+    @apply transition-all duration-300 ease-out;
+    @apply font-body text-text-primary placeholder-text-secondary;
+  }
+
+  .form-label {
+    @apply block text-sm font-semibold text-text-primary mb-2;
+  }
+
+  .form-error {
+    @apply text-error text-sm mt-1;
+  }
+
+  /* Section Components */
+  .section {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .section-surface {
+    @apply bg-surface;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Animation Utilities */
+  .fade-in {
+    animation: fadeIn var(--transition-base) ease-out;
+  }
+
+  .fade-in-up {
+    animation: fadeInUp var(--transition-base) ease-out;
+  }
+
+  .stagger-1 {
+    animation-delay: var(--transition-stagger);
+  }
+
+  .stagger-2 {
+    animation-delay: calc(var(--transition-stagger) * 2);
+  }
+
+  .stagger-3 {
+    animation-delay: calc(var(--transition-stagger) * 3);
+  }
+
+  .stagger-4 {
+    animation-delay: calc(var(--transition-stagger) * 4);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .shadow-subtle {
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection Styling */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--color-accent);
+  color: white;
+}
