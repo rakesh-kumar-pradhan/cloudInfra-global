@@ -7,10 +7,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
-    /*CloudInfra dark green */
+    /* CloudInfra dark green */
     --color-primary: #0B5D3B;
     --color-primary-50: #E9F5EF;
     --color-primary-100: #CFEBDD;
@@ -23,7 +22,7 @@
     --color-primary-800: #094A2F;
     --color-primary-900: #063321;
 
-    /* Secondary Colors - Supporting Technical Depth */
+    /* Secondary Colors */
     --color-secondary: #2F8F5B;
     --color-secondary-50: #ECF8F1;
     --color-secondary-100: #D3EFDF;
@@ -36,7 +35,7 @@
     --color-secondary-800: #1B5234;
     --color-secondary-900: #123726;
 
-    /* Accent Colors - Strategic Focus Moments */
+    /* Accent Colors */
     --color-accent: #7BCB8B;
     --color-accent-50: #F2FBF5;
     --color-accent-100: #DEF4E4;
@@ -49,14 +48,13 @@
     --color-accent-800: #1F5C32;
     --color-accent-900: #143E22;
 
-    /* Background Colors */
+    /* Background & Text */
     --color-background: #F9FCFA;
     --color-surface: #EFF7F2;
-    /* Text Colors */
     --color-text-primary: #10261C;
     --color-text-secondary: #4A6B5A;
 
-    /* Status Colors */
+    /* Status */
     --color-success: #2F8F5B;
     --color-success-50: #f0fdf4;
     --color-success-100: #dcfce7;
@@ -99,23 +97,19 @@
     --shadow-card: 0 3px 10px rgba(11, 93, 59, 0.10);
     --shadow-hover: 0 8px 22px rgba(11, 93, 59, 0.18);
 
-    /* Animation Timing */
+    /* Animations */
     --transition-base: 300ms ease-out;
     --transition-stagger: 100ms;
   }
 
   body {
-    @apply font-body text-text-primary bg-background antialiased;
-    font-feature-settings: 'kern' 1, 'liga' 1;
+    @apply antialiased text-gray-900 bg-white;
+     font-feature-settings: 'kern' 1, 'liga' 1;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-headline font-semibold;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+    font-family: 'Source Sans Pro', sans-serif;
   }
 
   h1 {
@@ -146,17 +140,15 @@
     @apply text-base leading-relaxed;
   }
 
-  code,
-  pre {
+  code, pre {
     @apply font-mono text-sm;
+    font-family: 'JetBrains Mono', monospace;
   }
 }
 
 @layer components {
-
-  /* Card Components */
   .card {
-    @apply bg-white rounded-lg;
+    @apply bg-white rounded-lg transition-shadow;
     box-shadow: var(--shadow-card);
     transition: box-shadow var(--transition-base);
   }
@@ -170,62 +162,50 @@
     box-shadow: var(--shadow-elevated);
   }
 
-  /* Button Components */
   .btn {
-    @apply font-cta font-semibold px-6 py-3 rounded-md transition-all duration-300 ease-out;
-    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply font-semibold px-6 py-3 rounded-md transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary-800;
-    @apply focus:ring-primary-500;
+    @apply bg-green-700 text-white hover:bg-green-800 focus:ring-green-600;
   }
 
   .btn-secondary {
-    @apply bg-secondary text-white hover:bg-secondary-800;
-    @apply focus:ring-secondary-500;
+    @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
   }
 
   .btn-accent {
-    @apply bg-accent text-white hover:bg-accent-700;
-    @apply focus:ring-accent-500;
+    @apply bg-green-500 text-white hover:bg-green-600 focus:ring-green-400;
   }
 
   .btn-outline {
-    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white;
-    @apply focus:ring-primary-500;
+    @apply border-2 border-green-700 text-green-700 hover:bg-green-700 hover:text-white focus:ring-green-600;
   }
 
-  /* Form Components */
   .form-input {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-md;
-    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent;
-    @apply transition-all duration-300 ease-out;
-    @apply font-body text-text-primary placeholder-text-secondary;
+    @apply w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 ease-out text-gray-900 placeholder-gray-500;
   }
 
   .form-label {
-    @apply block text-sm font-semibold text-text-primary mb-2;
+    @apply block text-sm font-semibold text-gray-900 mb-2;
   }
 
   .form-error {
-    @apply text-error text-sm mt-1;
+    @apply text-red-600 text-sm mt-1;
   }
 
-  /* Section Components */
   .section {
     @apply py-16 md:py-24 lg:py-32;
   }
 
   .section-surface {
-    @apply bg-surface;
+    @apply bg-gray-50;
   }
 
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Animation Utilities */
   .fade-in {
     animation: fadeIn var(--transition-base) ease-out;
   }
@@ -234,21 +214,10 @@
     animation: fadeInUp var(--transition-base) ease-out;
   }
 
-  .stagger-1 {
-    animation-delay: var(--transition-stagger);
-  }
-
-  .stagger-2 {
-    animation-delay: calc(var(--transition-stagger) * 2);
-  }
-
-  .stagger-3 {
-    animation-delay: calc(var(--transition-stagger) * 3);
-  }
-
-  .stagger-4 {
-    animation-delay: calc(var(--transition-stagger) * 4);
-  }
+  .stagger-1 { animation-delay: var(--transition-stagger); }
+  .stagger-2 { animation-delay: calc(var(--transition-stagger) * 2); }
+  .stagger-3 { animation-delay: calc(var(--transition-stagger) * 3); }
+  .stagger-4 { animation-delay: calc(var(--transition-stagger) * 4); }
 }
 
 @layer utilities {
@@ -273,35 +242,23 @@
   }
 }
 
-/* Keyframe Animations */
+/* Keyframes */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Smooth Scrolling */
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Selection Styling */
+/* Selection */
 ::selection {
   background-color: var(--color-accent);
   color: white;
